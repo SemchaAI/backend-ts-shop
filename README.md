@@ -3,6 +3,9 @@
 For work with this server you need to initialize all variables in your .env file
 As example you can use .env.example file
 
+Also you can check main structure of BD.
+![alt text](image-5.png)
+
 # First pass (will be important in future)
 
 Configuration of smtp email.
