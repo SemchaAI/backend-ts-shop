@@ -142,6 +142,7 @@ class ProductService {
     // return { products };
   }
   async getOneProduct(id) {
+    console.log('youGetProduct');
     // const product = await ProductModel.findById(id);
     // await product.populate({
     //   path: 'info',
@@ -152,11 +153,11 @@ class ProductService {
     const info = await Info.find({ productId: id });
     // console.log(info);
     const thumbnails = await Thumbnail.findOne({ productId: id });
-    console.log(thumbnails);
+    // console.log(thumbnails);
     const product = await ProductModel.findById(id);
     product.info = info;
     product.thumbnails = thumbnails;
-    console.log(product.thumbnails);
+    // console.log(product.thumbnails);
     return product;
   }
 }
