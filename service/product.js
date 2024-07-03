@@ -9,13 +9,25 @@ class ProductService {
     const { title, description, cnt, price, typeId, brandId, info } = req.body;
     console.log(title, description, cnt, price, typeId, brandId, info);
     const { img, ...thumbnails } = req.files;
-    let fileName = `${title}-` + uuid.v4() + '.webp';
-    img.mv(path.resolve(__dirname, '..', 'static', fileName));
+    let fileName = `${title.replace(/ /g, '-')}-` + uuid.v4();
+    let file = fileName + '.webp';
+    await img.mv(path.resolve(__dirname, '..', 'static', file));
+
+    //resize image
+    // sharp(path.resolve(__dirname, '..', 'static', file))
+    //   .resize(400, 400)
+    //   .toFile(
+    //     path.resolve(__dirname, '..', 'static', `${fileName}-mobile.webp`),
+    //     (err, info) => {
+    //       if (err) console.log(err);
+    //     }
+    //   );
+    //resize image
 
     const product = await ProductModel.create({
       title,
       description,
-      img: fileName,
+      img: file,
       cnt,
       price,
       typeId,
@@ -109,7 +121,7 @@ class ProductService {
       count = await ProductModel.countDocuments();
     }
 
-    console.log(count, 'count');
+    // console.log(count, 'count');
 
     const total = Math.ceil(count / limit);
 
@@ -142,7 +154,7 @@ class ProductService {
     // return { products };
   }
   async getOneProduct(id) {
-    console.log('youGetProduct');
+    // console.log('youGetProduct');
     // const product = await ProductModel.findById(id);
     // await product.populate({
     //   path: 'info',

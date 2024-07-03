@@ -45,7 +45,6 @@ class UserController {
   }
   async logout(req, res, next) {
     try {
-      console.log('logout');
       const { refreshToken } = req.cookies;
       const token = await UserService.logout(refreshToken);
       res.clearCookie('refreshToken');
@@ -59,7 +58,9 @@ class UserController {
     try {
       const activationLink = req.params.link;
       await UserService.activate(activationLink);
-      return res.redirect(process.env.CLIENT_URL);
+      return res.redirect(
+        process.env.CLIENT_URL + process.env.CLIENT_URL_ACTIVATION
+      );
     } catch (e) {
       next(e);
     }

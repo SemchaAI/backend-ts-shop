@@ -14,6 +14,8 @@ module.exports = function (role) {
       const userData = TokenService.validateAccessToken(accessToken);
       console.log(userData);
       if (!userData.role || userData.role !== 'ADMIN') {
+        const refreshToken = req.cookies.refreshToken;
+        TokenService.removeToken(refreshToken);
         return next(ApiError.NotAdminError());
       }
       req.user = userData;

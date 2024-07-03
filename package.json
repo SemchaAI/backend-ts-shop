@@ -1,7 +1,7 @@
 {
   "name": "authjwt",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "test auth",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js"
@@ -21,6 +21,7 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.2",
     "nodemailer": "^6.9.9",
+    "sharp": "^0.33.4",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

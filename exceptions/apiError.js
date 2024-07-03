@@ -9,8 +9,11 @@ module.exports = class ApiError extends Error {
   static UnauthorizedError() {
     return new ApiError(401, 'Пользователь не авторизован');
   }
+  static ActivationError() {
+    return new ApiError(401, 'Активация аккаунта не была проведена');
+  }
   static NotAdminError() {
-    return new ApiError(401, 'Добавлять товары может только админ');
+    return new ApiError(403, 'Добавлять товары может только админ');
   }
   static internal(message) {
     return new ApiError(500, message);
