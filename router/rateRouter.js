@@ -9,6 +9,7 @@ router.post('/rate', authMiddleware, ProductController.rateProduct);
 router.patch('/rate/update', authMiddleware, ProductController.updateRating);
 router.post('/rate/check', ProductController.checkIsRated);
 
-router.get('/rate', ProductController.getProductRatings);
+router.get('/rates', ProductController.getProductRatings);
+router.get('/rate', ProductController.getProductRating);
 
 module.exports = router;

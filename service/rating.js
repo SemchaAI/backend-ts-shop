@@ -14,7 +14,7 @@ class RatingService {
       userId,
       productId,
     });
-    console.log(candidate, 'Rating candidate');
+    // console.log(candidate, 'Rating candidate');
     if (candidate) {
       throw ApiError.BadRequest(
         `Рейтинг продукта для этого пользователя уже существует, отредактируйте его`
@@ -47,23 +47,21 @@ class RatingService {
     return { rating, userName: user.name, userRole: user.role };
   }
   async updateRating(req) {
-    const { userId, productId, rate, message, difference } = req.body;
-    console.log(userId, productId, rate, message);
+    const { userId, productId, rate, message } = req.body;
+
     let candidate = await RatingModel.findOne({
       userId,
       productId,
     });
-    console.log(candidate, 'Rating candidate');
+
     if (!candidate) {
       throw ApiError.BadRequest(
         `Рейтинг продукта для этого пользователя не существует, создайте его`
       );
     }
-    candidate.message = message;
-    candidate.rate = rate;
-
     const product = await ProductModel.findOne({ _id: productId });
-    console.log(product, 'product');
+    const difference = rate - candidate.rate;
+    // console.log(rate, message, rate, candidate.rate, difference);
     if (product.rating.rates === 1) {
       product.rating.mediumRate = rate;
     } else {
@@ -74,6 +72,9 @@ class RatingService {
       ).toFixed(2);
     }
     await product.save();
+
+    candidate.message = message;
+    candidate.rate = rate;
     await candidate.save();
     return { success: true };
     // return { rating, userName: user.name, userRole: user.role };
@@ -89,6 +90,12 @@ class RatingService {
       .limit(limit);
     // console.log(ratings, 'Ratings');
     return { ratings, total };
+  }
+  async getRating(req) {
+    const { productId, userId } = req.query;
+    const rating = await RatingModel.findOne({ productId, userId });
+    // console.log(ratings, 'Ratings');
+    return { ...rating };
   }
   async isRated(userId, productId) {
     console.log(userId, productId);

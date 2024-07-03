@@ -120,6 +120,14 @@ class ProductController {
       next(ApiError.BadRequest(e.message));
     }
   }
+  async getProductRating(req, res, next) {
+    try {
+      const rating = await RatingService.getRating(req);
+      return res.json(rating);
+    } catch (e) {
+      next(ApiError.BadRequest(e.message));
+    }
+  }
   async checkIsRated(req, res, next) {
     try {
       const isRated = await RatingService.isRated(
