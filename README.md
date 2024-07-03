@@ -6,7 +6,10 @@ As example you can use .env.example file
 Also you can check main structure of BD.
 ![alt text](image-5.png)
 
-# First pass (will be important in future)
+# First pass
+
+In version v2, this step is important.
+Without this pass, user don't will be activated!
 
 Configuration of smtp email.
 
