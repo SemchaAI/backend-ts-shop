@@ -1,6 +1,6 @@
 # dependencies
 /node_modules
-/static
+#/static
 
 # local env files
 .env
