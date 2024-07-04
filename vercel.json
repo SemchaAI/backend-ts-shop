@@ -6,14 +6,18 @@
       "use": "@vercel/node"
     },
     {
-      "src": "static/**",
+      "src": "/(.*).(?:webp)",
       "use": "@vercel/static"
     }
   ],
-  "redirects": [
+  "routes": [
     {
-      "source": "static/:path*",
-      "destination": "/"
+      "src": "/api/(.*)",
+      "dest": "index.js"
+    },
+    {
+      "src": "/((?!.*\\.\\w+$).*)",
+      "dest": "/index.js"
     }
   ]
 }
