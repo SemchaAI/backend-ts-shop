@@ -10,6 +10,12 @@
       "use": "@vercel/static"
     }
   ],
+  "redirects": [
+    {
+      "source": "static/:path*",
+      "destination": "/"
+    }
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
@@ -18,12 +24,6 @@
     {
       "src": "/((?!.*\\.\\w+$).*)",
       "dest": "/index.js"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "static/:path*",
-      "destination": "/"
     }
   ]
 }
