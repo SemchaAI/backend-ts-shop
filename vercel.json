@@ -6,7 +6,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "(.*).(?:webp)",
+      "src": "static/**",
       "use": "@vercel/static"
     }
   ],
@@ -18,6 +18,10 @@
     {
       "src": "/((?!.*\\.\\w+$).*)",
       "dest": "/index.js"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/$1"
     }
   ]
 }
