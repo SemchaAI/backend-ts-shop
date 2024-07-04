@@ -15,15 +15,5 @@
       "source": "static/:path*",
       "destination": "/"
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "index.js"
-    },
-    {
-      "src": "/((?!.*\\.\\w+$).*)",
-      "dest": "/index.js"
-    }
   ]
 }
