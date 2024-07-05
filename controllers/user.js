@@ -83,6 +83,15 @@ class UserController {
       next(e);
     }
   }
+  async getUser(req, res, next) {
+    try {
+      const { refreshToken } = req.cookies;
+      const userData = await UserService.getUser(refreshToken);
+      return res.json(userData);
+    } catch (e) {
+      next(e);
+    }
+  }
   async test(req, res, next) {
     try {
       console.log('HERE TRUE', req.user);
