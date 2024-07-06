@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
+const cookie = require('cookie-session');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const router = require('./router/index');
@@ -22,9 +22,10 @@ const sessionConfig = {
   name: 'backend-ts-shop',
   resave: false,
   saveUninitialized: false,
-  // store: store,
+  maxAge: 1000 * 60 * 15,
   cookie: {
-    sameSite: 'none', // THIS is the config you are looking for.
+    sameSite: 'none',
+    secure: true,
   },
 };
 
@@ -32,7 +33,7 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'static')));
 app.use(fileUpload({}));
 app.use(cookieParser());
-app.use(session(sessionConfig));
+app.use(cookie(sessionConfig));
 app.use(cors(corsOptions));
 app.use('/api', router);
 app.use(errorMiddleware);
