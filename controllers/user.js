@@ -38,6 +38,7 @@ class UserController {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: false,
         sameSite: 'none',
+        secure: true,
       });
       return res.json(userData);
     } catch (e) {
