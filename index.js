@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const router = require('./router/index');
@@ -16,10 +17,22 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 
+const sessionConfig = {
+  secret: 'MYSECRET',
+  name: 'backend-ts-shop',
+  resave: false,
+  saveUninitialized: false,
+  // store: store,
+  cookie: {
+    sameSite: 'none', // THIS is the config you are looking for.
+  },
+};
+
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'static')));
 app.use(fileUpload({}));
 app.use(cookieParser());
+app.use(session(sessionConfig));
 app.use(cors(corsOptions));
 app.use('/api', router);
 app.use(errorMiddleware);
