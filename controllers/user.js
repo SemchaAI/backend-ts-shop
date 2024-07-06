@@ -78,7 +78,9 @@ class UserController {
 
       res.cookie('role', userData.user.role, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
+        httpOnly: false,
+        sameSite: 'none',
+        secure: true,
       });
       return res.json(userData);
     } catch (e) {
