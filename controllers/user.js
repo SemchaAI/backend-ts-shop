@@ -36,9 +36,10 @@ class UserController {
       });
       res.cookie('role', userData.user.role, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        httpOnly: false,
-        sameSite: 'none',
-        secure: true,
+        httpOnly: true,
+        // httpOnly: false,
+        // sameSite: 'none',
+        // secure: true,
         domain: '.railway.app',
       });
       return res.json(userData);
@@ -79,9 +80,10 @@ class UserController {
 
       res.cookie('role', userData.user.role, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        httpOnly: false,
-        secure: true,
-        sameSite: 'none',
+        httpOnly: true,
+        // httpOnly: false,
+        // secure: true,
+        // sameSite: 'none',
         domain: '.railway.app',
       });
       return res.json(userData);
